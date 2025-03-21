@@ -1,5 +1,7 @@
 project('Vector 2D', 'c', default_options: 'default_library=both')
 
+add_global_arguments(['-Wall', '-Wextra', '-pedantic', '-ggdb'], language: 'c')
+
 headers = include_directories('include')
 
 vec2d_lib = library(
