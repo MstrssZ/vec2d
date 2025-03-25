@@ -1,36 +1,36 @@
-#include <stdio.h>
+#include "../include/raylib.h"
 #include "../include/vec2d.h"
+#include <stdio.h>
 
-int main() {
-    printf("hello\n");
-    Vec2f v1 = (Vec2f){1, 2};
+#define WIN_WIDTH 800
+#define WIN_HEIGHT 600
+#define CENTER_W (WIN_WIDTH/2)
+#define CENTER_H (WIN_HEIGHT/2)
 
+void drawVec2Arrow(Vec2 vector){
+  int vecxnorm = CENTER_W + (vector.x * 20);
+  int vecynorm = CENTER_H - (vector.y * 20);
+  DrawLine(CENTER_W, CENTER_H, vecxnorm, vecynorm, WHITE);
+  //TODO: implement the triangle at the end of the vector
+  //DrawTriangle(Vector2 v1, Vector2 v2, Vector2 v3, Color color)
+}
 
-    Vec2f v2 = (Vec2f){3, 4};
-    Vec2f add = vec2f_add(v1, v2);
-    Vec2f sub = vec2f_sub(v2, v1);
-    Vec2f mult = vec2f_mult(v1, v2);
-    Vec2f div = vec2f_div(v2, v1);
-    float dot = vec2f_dot(v2, v1);
-    Vec2f scale = vec2f_scale_copy(v2, 3);
-    float length = vec2f_length(v1);
+int main(void) {
+  InitWindow(WIN_WIDTH, WIN_HEIGHT, "ttitle");
+  printf("hello\n");
+   Vec2 v = (Vec2){1, 2};
+  while (!WindowShouldClose()) {
+    BeginDrawing();
+    for (int i = 0; i < WIN_WIDTH; ++i) {
+      if (i % 50 == 0) DrawLine(i, 0, i, WIN_HEIGHT, ColorAlpha(GRAY, 0.2f));
+    }
+    for (int i = 0; i < WIN_HEIGHT; ++i) {
+      if (i % 50 == 0) DrawLine(0, i, WIN_WIDTH, i, ColorAlpha(GRAY, 0.2f));
+    }
+    drawVec2Arrow(v);
+    EndDrawing();
+  }
+  CloseWindow();
 
-    printf("v1: {%f, %f}\n", v1.x, v1.y);
-    printf("v2: {%f, %f}\n", v2.x, v2.y);
-    printf("add: {%f, %f}\n", add.x, add.y);
-    printf("sub: {%f, %f}\n", sub.x, sub.y);
-    printf("mult: {%f, %f}\n", mult.x, mult.y);
-    printf("div: {%f, %f}\n", div.x, div.y);
-    printf("dot: %f\n", dot);
-    printf("scale: {%f, %f}\n", scale.x, scale.y);
-    vec2f_scale_reference(&add, 3);
-    printf("add: {%f, %f}\n", add.x, add.y);
-    printf("length: %f\n", length);
-    printf("v2 length: %f\n", vec2f_length(v2));
-    printf("add length: %f\n", vec2f_length(add));
-    printf("sub length: %f\n", vec2f_length(sub));
-    printf("mult length: %f\n", vec2f_length(mult));
-    printf("div length: %f\n", vec2f_length(div));
-
-    return 0;
+  return 0;
 }
