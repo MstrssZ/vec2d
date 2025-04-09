@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../include/vec2d.h"
 
-int main() {
+int main(void) {
     printf("hello\n");
     Vec2f v1 = (Vec2f){1, 2};
 
